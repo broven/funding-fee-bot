@@ -6,7 +6,7 @@
 
 - Python + ccxt
 - 统一资金费接口
-- Binance provider（内部基于 `CcxtBaseProvider`）
+- Binance / Bybit / Bitget providers（内部基于 `CcxtBaseProvider`）
 - 支持：
   - 单交易对当前资金费率
   - 全市场当前资金费率
@@ -15,17 +15,17 @@
 ## Quick Start
 
 ```bash
-python -m pip install -e .
+uv sync --extra dev
 ```
 
 ## Run Tests
 
 ```bash
-pytest tests/unit -v
+uv run pytest tests/unit -v
 ```
 
 可选 live 测试（需要外网和可用交易所 API）：
 
 ```bash
-RUN_LIVE_TESTS=1 pytest tests/integration/test_binance_live.py -v
+RUN_LIVE_TESTS=1 uv run pytest tests/integration/test_binance_live.py -v
 ```
