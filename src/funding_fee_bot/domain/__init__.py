@@ -5,6 +5,7 @@ from .errors import (
     FundingRateLimitError,
     FundingSymbolNotFoundError,
 )
+from .interfaces import FundingRateProvider
 from .models import FundingRateCurrent, FundingRateHistoryItem
 
 __all__ = [
@@ -13,6 +14,7 @@ __all__ = [
     "FundingRateLimitError",
     "FundingSymbolNotFoundError",
     "FundingDataError",
+    "FundingRateProvider",
     "FundingRateCurrent",
     "FundingRateHistoryItem",
 ]
