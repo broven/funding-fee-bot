@@ -76,7 +76,22 @@ class CcxtBaseProvider(FundingRateProvider):
             ) from exc
 
     def fetch_current_all(self) -> list[FundingRateCurrent]:
-        raise NotImplementedError
+        exchange = self._get_exchange()
+        raw_map = exchange.fetch_funding_rates()
+        fetched_at = int(time.time() * 1000)
+        rows = raw_map.values() if isinstance(raw_map, dict) else raw_map
+
+        return [
+            FundingRateCurrent(
+                exchange=self.exchange_id,
+                symbol=raw["symbol"],
+                funding_rate=Decimal(str(raw["fundingRate"])),
+                funding_timestamp=raw.get("timestamp"),
+                next_funding_timestamp=raw.get("nextFundingTimestamp"),
+                fetched_at=fetched_at,
+            )
+            for raw in rows
+        ]
 
     def fetch_history(
         self,
@@ -84,4 +99,17 @@ class CcxtBaseProvider(FundingRateProvider):
         since: int | None = None,
         limit: int | None = None,
     ) -> list[FundingRateHistoryItem]:
-        raise NotImplementedError
+        exchange = self._get_exchange()
+        rows = exchange.fetch_funding_rate_history(symbol, since=since, limit=limit)
+        fetched_at = int(time.time() * 1000)
+
+        return [
+            FundingRateHistoryItem(
+                exchange=self.exchange_id,
+                symbol=row.get("symbol") or symbol,
+                funding_rate=Decimal(str(row["fundingRate"])),
+                funding_timestamp=row["timestamp"],
+                fetched_at=fetched_at,
+            )
+            for row in rows
+        ]
