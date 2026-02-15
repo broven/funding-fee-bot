@@ -1,11 +1,19 @@
-from .binance import BinanceFundingProvider
-from .bitget import BitgetFundingProvider
-from .bybit import BybitFundingProvider
-from .ccxt_base_provider import CcxtBaseProvider
+from .binance import BinanceMarketDataProvider
+from .bitget import BitgetMarketDataProvider
+from .bybit import BybitMarketDataProvider
+from .ccxt import (
+    CcxtFundingProviderBase,
+    CcxtOrderBookProviderBase,
+    CcxtProviderCore,
+    CcxtSpotProviderBase,
+)
 
 __all__ = [
-    "CcxtBaseProvider",
-    "BinanceFundingProvider",
-    "BybitFundingProvider",
-    "BitgetFundingProvider",
+    "CcxtProviderCore",
+    "CcxtFundingProviderBase",
+    "CcxtSpotProviderBase",
+    "CcxtOrderBookProviderBase",
+    "BinanceMarketDataProvider",
+    "BybitMarketDataProvider",
+    "BitgetMarketDataProvider",
 ]

@@ -28,3 +28,10 @@ class FundingSymbolNotFoundError(FundingProviderError):
 
 class FundingDataError(FundingProviderError):
     pass
+
+
+class UnsupportedCapabilityError(Exception):
+    def __init__(self, exchange: str, capability: str):
+        super().__init__(f"exchange {exchange} does not support capability {capability}")
+        self.exchange = exchange
+        self.capability = capability

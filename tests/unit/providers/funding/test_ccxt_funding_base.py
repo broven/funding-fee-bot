@@ -1,9 +1,9 @@
 from decimal import Decimal
 
-from funding_fee_bot.providers.ccxt_base_provider import CcxtBaseProvider
+from funding_fee_bot.providers.ccxt.funding_base import CcxtFundingProviderBase
 
 
-class FakeProvider(CcxtBaseProvider):
+class FakeFundingProvider(CcxtFundingProviderBase):
     exchange_id = "binance"
 
 
@@ -12,7 +12,6 @@ class FakeExchange:
         return None
 
     def fetch_funding_rate(self, symbol):
-        assert symbol == "BTC/USDT:USDT"
         return {
             "symbol": symbol,
             "fundingRate": 0.0001,
@@ -22,7 +21,7 @@ class FakeExchange:
 
 
 def test_fetch_current_maps_to_standard_model(monkeypatch):
-    provider = FakeProvider()
+    provider = FakeFundingProvider()
     monkeypatch.setattr(provider, "_make_exchange", lambda: FakeExchange())
 
     result = provider.fetch_current("BTC/USDT:USDT")

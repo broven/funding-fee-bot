@@ -1,16 +1,16 @@
 # funding-fee-bot
 
-资金费套利机器人（当前聚焦资金费数据获取层）。
+资金费套利机器人（当前聚焦市场数据获取层）。
 
 ## Current Scope
 
 - Python + ccxt
-- 统一资金费接口
-- Binance / Bybit / Bitget providers（内部基于 `CcxtBaseProvider`）
-- 支持：
-  - 单交易对当前资金费率
-  - 全市场当前资金费率
-  - 历史资金费率（`since` / `limit`）
+- 能力化统一接口：
+  - 资金费率（Funding）
+  - 现货价格（Spot）
+  - 深度（Order Book，接口预留）
+- Binance / Bybit / Bitget providers
+- `MarketDataService` 路由 provider，并支持能力检查
 
 ## Quick Start
 

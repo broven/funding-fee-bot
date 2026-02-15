@@ -1,8 +1,14 @@
-from funding_fee_bot.providers.ccxt_base_provider import CcxtBaseProvider
+from funding_fee_bot.domain.capabilities import ProviderCapability
+from funding_fee_bot.providers.ccxt.funding_base import CcxtFundingProviderBase
+from funding_fee_bot.providers.ccxt.spot_base import CcxtSpotProviderBase
 
 
-class BybitFundingProvider(CcxtBaseProvider):
+class BybitMarketDataProvider(CcxtFundingProviderBase, CcxtSpotProviderBase):
     exchange_id = "bybit"
+    capabilities = {
+        ProviderCapability.FUNDING_RATE,
+        ProviderCapability.SPOT_PRICE,
+    }
 
     def __init__(self):
         super().__init__(

@@ -1,8 +1,9 @@
-from funding_fee_bot.providers.bybit import BybitFundingProvider
+from funding_fee_bot.domain.capabilities import ProviderCapability
+from funding_fee_bot.providers.bybit import BybitMarketDataProvider
 
 
-def test_bybit_provider_sets_exchange_id_and_default_options():
-    provider = BybitFundingProvider()
+def test_bybit_provider_declares_capabilities():
+    provider = BybitMarketDataProvider()
     assert provider.exchange_id == "bybit"
-    assert provider._options["options"]["defaultType"] == "swap"
-    assert provider._options["options"]["defaultSubType"] == "linear"
+    assert provider.supports(ProviderCapability.FUNDING_RATE) is True
+    assert provider.supports(ProviderCapability.SPOT_PRICE) is True

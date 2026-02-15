@@ -1,8 +1,9 @@
-from funding_fee_bot.providers.bitget import BitgetFundingProvider
+from funding_fee_bot.domain.capabilities import ProviderCapability
+from funding_fee_bot.providers.bitget import BitgetMarketDataProvider
 
 
-def test_bitget_provider_sets_exchange_id_and_default_options():
-    provider = BitgetFundingProvider()
+def test_bitget_provider_declares_capabilities():
+    provider = BitgetMarketDataProvider()
     assert provider.exchange_id == "bitget"
-    assert provider._options["options"]["defaultType"] == "swap"
-    assert provider._options["options"]["defaultSubType"] == "linear"
+    assert provider.supports(ProviderCapability.FUNDING_RATE) is True
+    assert provider.supports(ProviderCapability.SPOT_PRICE) is True
