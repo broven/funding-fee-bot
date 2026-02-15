@@ -18,6 +18,14 @@
 uv sync --extra dev
 ```
 
+## Dependency Management (uv)
+
+- 锁文件：`uv.lock`（需要纳入版本控制）
+- 新增运行时依赖：`uv add <package>`
+- 新增开发依赖（`dev` extra）：`uv add --optional dev <package>`
+- 变更依赖后刷新锁文件：`uv lock`
+- 同步本地环境：`uv sync --extra dev`
+
 ## Run Tests
 
 ```bash
