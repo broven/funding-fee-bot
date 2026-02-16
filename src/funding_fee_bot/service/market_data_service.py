@@ -13,6 +13,9 @@ class MarketDataService:
             "bitget": BitgetMarketDataProvider,
         }
 
+    def available_exchanges(self) -> list[str]:
+        return list(self._providers.keys())
+
     def get_provider(
         self,
         exchange: str,
