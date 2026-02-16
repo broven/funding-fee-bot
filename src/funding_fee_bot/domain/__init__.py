@@ -18,9 +18,6 @@ from .models import (
     FundingRateHistoryItem,
     OrderBookLevel,
     OrderBookSnapshot,
-    PerpPerpOpportunity,
-    SpotPerpDirection,
-    SpotPerpOpportunity,
     SpotTicker,
 )
 
@@ -38,9 +35,6 @@ __all__ = [
     "OrderBookProvider",
     "FundingRateCurrent",
     "FundingRateHistoryItem",
-    "PerpPerpOpportunity",
-    "SpotPerpOpportunity",
-    "SpotPerpDirection",
     "SpotTicker",
     "OrderBookLevel",
     "OrderBookSnapshot",
