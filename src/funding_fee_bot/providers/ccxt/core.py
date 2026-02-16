@@ -1,3 +1,5 @@
+import os
+
 import ccxt
 
 from funding_fee_bot.domain.interfaces import CapabilityAwareProvider
@@ -12,7 +14,11 @@ class CcxtProviderCore(CapabilityAwareProvider):
 
     def _make_exchange(self):
         exchange_cls = getattr(ccxt, self.exchange_id)
-        return exchange_cls(self._options)
+        opts = {**self._options}
+        proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+        if proxy:
+            opts["httpsProxy"] = proxy
+        return exchange_cls(opts)
 
     def _get_exchange(self):
         if self._exchange is None:
